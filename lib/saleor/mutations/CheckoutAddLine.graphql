@@ -1,0 +1,12 @@
+mutation CheckoutAddLine($checkoutId: ID!, $lines: [CheckoutLineInput!]!) {
+  checkoutLinesAdd(id: $checkoutId, lines: $lines) {
+    errors {
+      code
+      message
+      field
+    }
+    checkout {
+      ...Checkout
+    }
+  }
+}

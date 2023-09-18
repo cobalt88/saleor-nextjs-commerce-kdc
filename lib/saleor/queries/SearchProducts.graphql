@@ -1,0 +1,52 @@
+query SearchProducts(
+  $search: String!
+  $sortBy: ProductOrderField!
+  $sortDirection: OrderDirection!
+) {
+  products(
+    first: 100
+    channel: "default-channel"
+    sortBy: { field: $sortBy, direction: $sortDirection }
+    filter: { search: $search }
+  ) {
+    edges {
+      node {
+        id
+        slug
+        name
+        isAvailableForPurchase
+        description
+        seoTitle
+        seoDescription
+        pricing {
+          priceRange {
+            start {
+              gross {
+                currency
+                amount
+              }
+            }
+            stop {
+              gross {
+                currency
+                amount
+              }
+            }
+          }
+        }
+        media {
+          url(size: 2160)
+          type
+          alt
+        }
+        collections {
+          name
+        }
+        updatedAt
+        variants {
+          ...Variant
+        }
+      }
+    }
+  }
+}

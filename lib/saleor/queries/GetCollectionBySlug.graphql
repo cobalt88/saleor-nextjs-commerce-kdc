@@ -1,0 +1,17 @@
+query GetCollectionBySlug($slug: String!) {
+  collection(channel: "default-channel", slug: $slug) {
+    id
+    name
+    slug
+    description
+    seoTitle
+    seoDescription
+    products(first: 1, sortBy: { field: LAST_MODIFIED_AT, direction: DESC }) {
+      edges {
+        node {
+          updatedAt
+        }
+      }
+    }
+  }
+}

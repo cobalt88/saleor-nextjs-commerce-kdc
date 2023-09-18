@@ -1,0 +1,40 @@
+fragment MenuItem on MenuItem {
+  id
+  name
+  url
+  collection {
+    slug
+    products(first: 0) {
+      totalCount
+    }
+  }
+  category {
+    slug
+    products(channel: "default-channel", first: 0) {
+      totalCount
+    }
+  }
+  page {
+    slug
+  }
+}
+
+query GetMenuBySlug($slug: String!) {
+  menu(slug: $slug, channel: "default-channel") {
+    id
+    slug
+    name
+    items {
+      ...MenuItem
+      children {
+        ...MenuItem
+        children {
+          ...MenuItem
+          children {
+            ...MenuItem
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+fragment Checkout on Checkout {
+  id
+  totalPrice {
+    gross {
+      currency
+      amount
+    }
+    tax {
+      currency
+      amount
+    }
+  }
+  subtotalPrice {
+    gross {
+      currency
+      amount
+    }
+  }
+  quantity
+  lines {
+    id
+    quantity
+    variant {
+      ...Variant
+      product {
+        ...ProductDetails
+      }
+    }
+  }
+}
